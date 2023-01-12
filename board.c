@@ -19,7 +19,27 @@
  */
 static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastChangeX, Coordinate lastChangeY, GameResult *gameResult)
 {
-  // TODO: à compléter
+    unsigned int i, j;
+
+    for(i = 0; i < 2; i++)
+        if(boardSquares[i][0] != NONE && boardSquares[i][0] == boardSquares[i][1] && boardSquares[i][1] == boardSquares[i][2])
+            return true;
+
+    for(i = 0; i < 2; i++)
+        if(boardSquares[0][i] != NONE && boardSquares[0][i] == boardSquares[1][i] && boardSquares[1][i] == boardSquares[2][i])
+            return true;
+
+    if(boardSquares[0][0] != NONE && boardSquares[0][0] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][2])
+        return true;
+
+    if(boardSquares[0][2] != NONE && boardSquares[0][2] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][0])
+        return true;
+
+    for(i = 0; i < 2; i++)
+        for(j = 0; j < 2; j++)
+            if(boardSquares[i][j] == NONE) return false;
+
+    return true;
 }
 
 void Board_init (SquareChangeCallback onSquareChange, EndOfGameCallback onEndOfGame)

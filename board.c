@@ -22,23 +22,28 @@ static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastC
     unsigned int i, j;
 
     for(i = 0; i < 2; i++)
-        if(boardSquares[i][0] != NONE && boardSquares[i][0] == boardSquares[i][1] && boardSquares[i][1] == boardSquares[i][2])
+        if((boardSquares[i][0] != NONE && boardSquares[i][0] == boardSquares[i][1] && boardSquares[i][1] == boardSquares[i][2]) ||
+                (boardSquares[0][i] != NONE && boardSquares[0][i] == boardSquares[1][i] && boardSquares[1][i] == boardSquares[2][i]))
+        {
+            printf("%d\n", (GameResult)boardSquares[lastChangeY][lastChangeX]);
+            *gameResult = (GameResult)boardSquares[lastChangeY][lastChangeX];
             return true;
+        }
 
-    for(i = 0; i < 2; i++)
-        if(boardSquares[0][i] != NONE && boardSquares[0][i] == boardSquares[1][i] && boardSquares[1][i] == boardSquares[2][i])
-            return true;
-
-    if(boardSquares[0][0] != NONE && boardSquares[0][0] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][2])
+    if(boardSquares[0][0] != NONE && ((boardSquares[0][0] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][2]) ||
+            (boardSquares[0][2] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][0])))
+    {
+        printf("%d\n", (GameResult)boardSquares[lastChangeY][lastChangeX]);
+        *gameResult = (GameResult)boardSquares[lastChangeY][lastChangeX];
         return true;
+    }
 
-    if(boardSquares[0][2] != NONE && boardSquares[0][2] == boardSquares[1][1] && boardSquares[1][1] == boardSquares[2][0])
-        return true;
 
     for(i = 0; i < 2; i++)
         for(j = 0; j < 2; j++)
             if(boardSquares[i][j] == NONE) return false;
 
+    *gameResult = DRAW;
     return true;
 }
 

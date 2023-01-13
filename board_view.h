@@ -11,6 +11,7 @@
 #define BOARD_VIEW_H_
 
 #include "board.h"
+#include "tictactoe_errors.h"
 
 /**
  * Constructor of the board view.

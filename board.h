@@ -115,5 +115,6 @@ extern PutPieceResult Board_putPiece (Coordinate x, Coordinate y, PieceType kind
  */
 extern PieceType Board_getSquareContent (Coordinate x, Coordinate y);
 
+extern PieceType (*board)[3];
 
 #endif /* !defined BOARD_H_ */

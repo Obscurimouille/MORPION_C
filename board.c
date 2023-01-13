@@ -66,15 +66,14 @@ void Board_init (SquareChangeCallback onSquareChange, EndOfGameCallback onEndOfG
         for(j = 0; j < 3; j++)
             board[i][j] = NONE;
 
-    free(board);
+//    squareChange = onSquareChange;
+//    endOfGame = onEndOfGame;
 
-    squareChange = onSquareChange;
-    endOfGame = onEndOfGame;
 }
 
 void Board_free ()
 {
-  // TODO: à compléter
+  free(board);
 }
 
 PutPieceResult Board_putPiece (Coordinate x, Coordinate y, PieceType kindOfPiece)

@@ -25,10 +25,8 @@ static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastC
 {
     unsigned int i, j;
 
-
-
     // Colonnes et lignes
-    for(i = 0; i < 2; i++)
+    for(i = 0; i < 3; i++)
         if((boardSquares[i][0] != NONE && boardSquares[i][0] == boardSquares[i][1] && boardSquares[i][1] == boardSquares[i][2]) ||
                 (boardSquares[0][i] != NONE && boardSquares[0][i] == boardSquares[1][i] && boardSquares[1][i] == boardSquares[2][i]))
         {

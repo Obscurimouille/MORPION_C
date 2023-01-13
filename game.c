@@ -9,11 +9,17 @@
 #include "board_view.h"
 #include "board.h"
 
+void squareChangedCallback(Coordinate x, Coordinate y, PieceType newContent) {
 
+}
+
+void endOfGame(GameResult result) {
+
+}
 
 void Game_init (void)
 {
-  // TODO: initialiser tous les modules
+    Board_init(squareChangedCallback, endOfGame);
 }
 
 void Game_free (void)

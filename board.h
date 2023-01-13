@@ -11,6 +11,8 @@
 #define BOARD_H_
 
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * A logic coordinate in the board. This can be

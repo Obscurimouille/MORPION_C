@@ -9,31 +9,34 @@
 #include "board_view.h"
 #include "board.h"
 
-void squareChangedCallback(Coordinate x, Coordinate y, PieceType newContent) {
+unsigned char gameEnded = 0;
 
+void squareChangedCallback(Coordinate x, Coordinate y, PieceType newContent) {
+    BoardView_displaySquare(x, y, newContent);
 }
 
-void endOfGame(GameResult result) {
-
+void endOfGameCallback(GameResult result) {
+    gameEnded = 1;
+    BoardView_displayEndOfGame(result);
 }
 
 void Game_init (void)
 {
-    printf("[-] Game_init\n");
-    Board_init(squareChangedCallback, endOfGame);
+    Board_init(squareChangedCallback, endOfGameCallback);
     BoardView_init();
     PlayerManager_init();
 }
 
 void Game_free (void)
 {
-    printf("[-] Game_free\n");
     Board_free();
     BoardView_free();
-    PlayerManager_init();
+    PlayerManager_free();
 }
 
 void Game_loop (void)
 {
-	// TODO: à compléter
+    while(!gameEnded) {
+        PlayerManager_oneTurn();
+    }
 }

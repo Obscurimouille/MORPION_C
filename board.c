@@ -23,10 +23,8 @@ EndOfGameCallback endOfGame;
  */
 static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastChangeX, Coordinate lastChangeY, GameResult *gameResult)
 {
-    unsigned int i, j;
-
     // Colonnes et lignes
-    for(i = 0; i < 3; i++)
+    for(unsigned char i = 0; i < 3; i++)
         if((boardSquares[i][0] != NONE && boardSquares[i][0] == boardSquares[i][1] && boardSquares[i][1] == boardSquares[i][2]) ||
                 (boardSquares[0][i] != NONE && boardSquares[0][i] == boardSquares[1][i] && boardSquares[1][i] == boardSquares[2][i]))
         {
@@ -43,8 +41,8 @@ static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastC
     }
 
     // Pas fin
-    for(i = 0; i < 3; i++)
-        for(j = 0; j < 3; j++)
+    for(unsigned char i = 0; i < 3; i++)
+        for(unsigned char j = 0; j < 3; j++)
             if(boardSquares[i][j] == NONE) return false;
 
     // Fin par égalité
@@ -54,37 +52,39 @@ static bool isGameFinished (const PieceType boardSquares[3][3], Coordinate lastC
 
 void Board_init (SquareChangeCallback onSquareChange, EndOfGameCallback onEndOfGame)
 {
-
+    // Génération dynamique du tableau
     board = calloc(3, sizeof *board);
 
-    // Init tableau
-    int i, j;
-
-    for(i = 0; i < 3; i++)
-        for(j = 0; j < 3; j++)
+    // Initialisation du tableau de jeu
+    for(unsigned int i = 0; i < 3; i++)
+        for(unsigned int j = 0; j < 3; j++)
             board[i][j] = NONE;
 
-//    squareChange = onSquareChange;
-//    endOfGame = onEndOfGame;
-
+    // Récupération des callback
+    squareChange = onSquareChange;
+    endOfGame = onEndOfGame;
 }
 
 void Board_free ()
 {
-  free(board);
+    // Libération mémoire tableau de jeu
+    free(board);
 }
 
 PutPieceResult Board_putPiece (Coordinate x, Coordinate y, PieceType kindOfPiece)
 {
+    // Vérifier que la case est vide
     if(board[y][x] != NONE) return SQUARE_IS_NOT_EMPTY;
 
+    // Placer la pièce et avertir du changement
     board[y][x] = kindOfPiece;
     squareChange(x, y, kindOfPiece);
 
+    // Définir le résultat comme une éqalité en attendant la vérif
     GameResult result = DRAW;
-
+    // Vérifier si ce placement détermine la fin de la partie et récupérer le vainqueur
     if(isGameFinished(board, x, y, &result))
-        endOfGame(result);
+        endOfGame(result); // Fin de partie
 
     return PIECE_IN_PLACE;
 }

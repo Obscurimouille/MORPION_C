@@ -2,22 +2,34 @@
 #include <assert.h>
 #include <stdio.h>
 #include <board.h>
-
 #define CONFIG_TEXTUI
-
 #if defined CONFIG_TEXTUI
+
+PieceType (*view)[3];
 
 void BoardView_init (void)
 {
-    printf("BoardView_init\n");
-    BoardView_displayAll();
+    // Allocation dynamique en mémoire
+    view = calloc(3, sizeof *view);
+    // Initialisation du tableau
+    for(unsigned char i = 0; i < 3; i++)
+        for(unsigned char j = 0; j < 3; j++)
+            board[i][j] = NONE;
 }
 
 void BoardView_free (void)
 {
-
+    // Libération mémoire
+    free(board);
 }
 
+/**
+ * Convertir un type de piece en un caractère
+ *
+ * @param [in] piece Piece
+ *
+ * @return un caractère grapique associé à cette pièce
+ */
 char BoardView_pieceToChar(PieceType piece) {
     switch (piece) {
         case NONE: return ' ';
@@ -28,13 +40,10 @@ char BoardView_pieceToChar(PieceType piece) {
 
 void BoardView_displayAll (void)
 {
-    int i, j;
-
-    printf("\n");
-
-    for(i = 0; i < 3; i++) {
-        for(j = 0; j < 3; j++) {
-            printf(" %c ", BoardView_pieceToChar(board[i][j]));
+    // Afficher une grille complétée par les valeurs de view
+    for(unsigned char i = 0; i < 3; i++) {
+        for(unsigned char j = 0; j < 3; j++) {
+            printf(" %c ", BoardView_pieceToChar(view[i][j]));
             printf(j < 2 ? "|" : "\n");
         }
         if(i < 2) printf("---+---+---\n");
@@ -45,20 +54,22 @@ void BoardView_displayAll (void)
 
 void BoardView_displaySquare (Coordinate x, Coordinate y, PieceType kindOfPiece)
 {
-	BoardView_displayAll();
+    // Attribution d'une pièce dans view
+    view[y][x] = kindOfPiece;
+    BoardView_displayAll();
 }
 
 void BoardView_displayEndOfGame (GameResult result)
 {
     switch (result) {
         case CROSS_WINS:
-            printf("---- LES CROIX ONT GAGNEES ----");
+            printf("---- LES CROIX ONT GAGNES ----\n\n");
             break;
         case CIRCLE_WINS:
-            printf("--- LES CRECLES ONT GAGNEES ---");
+            printf("--- LES CERCLES ONT GAGNES ---\n\n");
             break;
         case DRAW:
-            printf("----------- EGALITE -----------");
+            printf("----------- EGALITE ----------\n\n");
             break;
     }
 }

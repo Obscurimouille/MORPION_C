@@ -9,6 +9,7 @@ SOURCES += \
         game.c \
         main.c \
         player_manager_mock.c \
+        player_manager_scanf.c \
         tictactoe_erros.c
 
 HEADERS += \

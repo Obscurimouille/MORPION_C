@@ -36,6 +36,7 @@ void Game_free (void)
 
 void Game_loop (void)
 {
+    // Tant que la partie n'est pas terminée, effectuer un tour
     while(!gameEnded) {
         PlayerManager_oneTurn();
     }

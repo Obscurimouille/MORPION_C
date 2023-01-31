@@ -12,10 +12,13 @@
 
 #if defined CONFIG_PLAYER_MANAGER_SCANF
 
-PieceType player = CIRCLE;
+// Joueur en cours
+PieceType player;
 
 void PlayerManager_init (void)
 {
+    // Premier joueur à jouer
+    player = CIRCLE;
 }
 
 void PlayerManager_free (void)
@@ -27,6 +30,7 @@ void PlayerManager_oneTurn (void)
     int x, y, read = 0;
     bool ok = false;
 
+    // Afficher quel joueur joue
     BoardView_displayPlayersTurn(player);
 
     do {
@@ -45,7 +49,7 @@ void PlayerManager_oneTurn (void)
     }
     while(!ok);
 
-    printf("a");
+    // Prochain tour
     player = player == CIRCLE ? CROSS : CIRCLE;
 }
 

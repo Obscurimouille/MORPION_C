@@ -5,7 +5,7 @@
  * @author jilias
  */
 
-#if !defined TEST_CHECKENDOFGAME_H_
+#if defined TEST_CHECKENDOFGAME_H_
 #define TEST_CHECKENDOFGAME_H_
 
 extern void test_CheckEndOfGame (void);

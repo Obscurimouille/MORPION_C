@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <board.h>
-#define CONFIG_TEXTUI
+
 #if defined CONFIG_TEXTUI
 
 PieceType (*view)[3];
@@ -78,10 +78,10 @@ void BoardView_displayPlayersTurn (PieceType thisPlayer)
 {
     switch (thisPlayer) {
         case CROSS:
-            printf("Au tour des croix");
+            printf("Au tour des croix\n");
             break;
         case CIRCLE:
-            printf("Au tour des cercles");
+            printf("Au tour des cercles\n");
             break;
         case NONE:
             fatalError("BoardView_displayPlayersTurn -> PLAYER: NONE");

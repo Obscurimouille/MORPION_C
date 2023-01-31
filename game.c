@@ -9,14 +9,14 @@
 #include "board_view.h"
 #include "board.h"
 
-unsigned char gameEnded = 0;
+bool gameEnded = false;
 
 void squareChangedCallback(Coordinate x, Coordinate y, PieceType newContent) {
     BoardView_displaySquare(x, y, newContent);
 }
 
 void endOfGameCallback(GameResult result) {
-    gameEnded = 1;
+    gameEnded = true;
     BoardView_displayEndOfGame(result);
 }
 

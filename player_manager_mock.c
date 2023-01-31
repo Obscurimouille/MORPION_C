@@ -9,7 +9,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#define CONFIG_PLAYER_MANAGER_MOCK
 #if defined CONFIG_PLAYER_MANAGER_MOCK
 
 typedef struct {

@@ -3,6 +3,9 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+DEFINES += CONFIG_PLAYER_MANAGER_SCANF
+DEFINES += CONFIG_TEXTUI
+
 SOURCES += \
         board.c \
         board_view_text.c \

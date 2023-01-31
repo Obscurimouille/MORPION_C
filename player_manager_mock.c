@@ -9,19 +9,25 @@
 #include <assert.h>
 #include <stdio.h>
 
+#define CONFIG_PLAYER_MANAGER_MOCK
 #if defined CONFIG_PLAYER_MANAGER_MOCK
 
 void PlayerManager_init (void)
 {
+
 }
 
 void PlayerManager_free (void)
 {
+
 }
 
 void PlayerManager_oneTurn (void)
 {
-  /* TODO: à compléter */
+  int x, y;
+  scanf("%d", &x);
+  scanf("%d", &y);
+
 }
 
 #endif //  #if defined CONFIG_PLAYER_MANAGER_MOCK

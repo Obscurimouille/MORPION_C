@@ -19,16 +19,18 @@ void endOfGame(GameResult result) {
 
 void Game_init (void)
 {
-    printf("[*] Game_init\n");
+    printf("[-] Game_init\n");
     Board_init(squareChangedCallback, endOfGame);
     BoardView_init();
+    PlayerManager_init();
 }
 
 void Game_free (void)
 {
-    printf("[*] Game_free\n");
+    printf("[-] Game_free\n");
     Board_free();
     BoardView_free();
+    PlayerManager_init();
 }
 
 void Game_loop (void)

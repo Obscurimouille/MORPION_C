@@ -35,10 +35,9 @@ void BoardView_displayAll (void)
     for(i = 0; i < 3; i++) {
         for(j = 0; j < 3; j++) {
             printf(" %c ", BoardView_pieceToChar(board[i][j]));
-            if(j < 2) printf("|");
-            else printf("\n");
+            printf(j < 2 ? "|" : "\n");
         }
-        if(j < 2) printf("---+---+---\n");
+        if(i < 2) printf("---+---+---\n");
     }
 
     printf("\n");
@@ -77,7 +76,6 @@ void BoardView_displayPlayersTurn (PieceType thisPlayer)
             fatalError("BoardView_displayPlayersTurn -> PLAYER: NONE");
             break;
     }
-
 }
 
 void BoardView_sayCannotPutPiece (void)
